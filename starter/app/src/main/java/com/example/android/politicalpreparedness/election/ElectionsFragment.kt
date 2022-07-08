@@ -63,6 +63,7 @@ class ElectionsFragment : Fragment() {
         viewModel.showMessageInt.observe(this, Observer {
             if (it != null) {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                viewModel.onToastShow()
             }
         })
 

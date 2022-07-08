@@ -9,6 +9,10 @@
     <string name="loading_upcoming_elections_message">Loading upcoming Elections</string>
     <string name="load_upcoming_elections_success">Load upcoming Elections success</string>
     <string name="load_upcoming_elections_error">Load upcoming Elections Error</string>
+    <string name="could_not_load_voter_info">Could not load Voter info</string>
+    <string name="voting_location_click">Voting Locations - Click to open</string>
+    <string name="ballot_information_click">Ballot Information - Click to open</string>
+    <string name="election_info_click">Election information - (Click to view detail)</string>
 
 
 </resources>

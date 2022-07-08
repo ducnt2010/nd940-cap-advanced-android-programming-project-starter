@@ -21,3 +21,8 @@ fun isShowLoading(view: View, isShow: Boolean) {
     Log.i(TAG, "isShowLoading: $isShow")
     view.visibility = if (isShow) View.VISIBLE else View.GONE
 }
+
+@BindingAdapter("goneIfUrlNull")
+fun goneIfUrlNull(view: View, url: String?) {
+    view.visibility = if (url == null || url.isEmpty()) View.GONE else View.VISIBLE
+}

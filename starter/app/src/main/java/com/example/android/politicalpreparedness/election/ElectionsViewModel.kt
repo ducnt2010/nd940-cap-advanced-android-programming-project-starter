@@ -63,7 +63,7 @@ class ElectionsViewModel(private val electionsDatasource: ElectionsDatasource) :
                 }
             }
 
-            _showLoading.value=false
+            _showLoading.value = false
         }
     }
 
@@ -75,6 +75,10 @@ class ElectionsViewModel(private val electionsDatasource: ElectionsDatasource) :
 
     fun navigateElectionDetailComplete() {
         _selectedElection.value = null
+    }
+
+    fun onToastShow() {
+        _showMessageInt.value = null
     }
 
 }
