@@ -2,6 +2,7 @@ package com.example.android.politicalpreparedness
 
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.politicalpreparedness.election.adapter.ElectionListAdapter
@@ -25,4 +26,20 @@ fun isShowLoading(view: View, isShow: Boolean) {
 @BindingAdapter("goneIfUrlNull")
 fun goneIfUrlNull(view: View, url: String?) {
     view.visibility = if (url == null || url.isEmpty()) View.GONE else View.VISIBLE
+}
+
+@BindingAdapter("customText")
+fun customText(button: Button, isFollowing: Boolean) {
+    Log.i(TAG, "buttonFollowText: $isFollowing")
+    val content = if (!isFollowing) {
+        button.context.getString(R.string.follow_election)
+    } else {
+        button.context.getString(R.string.unfollow_election)
+    }
+    button.text = content
+}
+
+@BindingAdapter("goneIfElectionNull")
+fun goneIfElectionNull(view: View, election: Election?) {
+    view.visibility = if (election == null) View.GONE else View.VISIBLE
 }

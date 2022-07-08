@@ -34,7 +34,7 @@
                 android:id="@+id/electionDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{election.electionDay.toString()}"
+                android:text="@{election.electionDay.toLocaleString()}"
                 android:textSize="@dimen/election_item_text_size"
                 tools:text="Date" />
         </LinearLayout>

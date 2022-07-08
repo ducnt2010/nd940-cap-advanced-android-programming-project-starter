@@ -22,7 +22,7 @@ class ElectionsViewModel(private val electionsDatasource: ElectionsDatasource) :
         get() = _upcomingElections
 
     // Create live data val for saved elections
-    private val _savedElections = MutableLiveData<List<Election>>()
+    private val _savedElections = electionsDatasource.getSavedElections()
     val savedElections: LiveData<List<Election>>
         get() = _savedElections
 
@@ -66,7 +66,6 @@ class ElectionsViewModel(private val electionsDatasource: ElectionsDatasource) :
             _showLoading.value = false
         }
     }
-
 
     // Create functions to navigate to saved or upcoming election voter info
     fun onElectionItemSelected(item: Election) {

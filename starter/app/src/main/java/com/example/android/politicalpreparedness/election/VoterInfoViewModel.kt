@@ -58,12 +58,17 @@ class VoterInfoViewModel(
     val showMessageInt: LiveData<Int>
         get() = _showMessageInt
 
+    private val _isFollowing = MutableLiveData<Boolean>()
+    val isFollowing: LiveData<Boolean>
+        get() = _isFollowing
+
 
     /**
      * Hint: The saved state can be accomplished in multiple ways. It is directly related to how elections are saved/removed from the database.
      */
     init {
         loadVoterInfo()
+        checkLocalElectionById()
     }
 
     fun loadVoterInfo() {
@@ -92,6 +97,31 @@ class VoterInfoViewModel(
                 }
             }
         }
+    }
+
+    private fun checkLocalElectionById() {
+        viewModelScope.launch {
+            _isFollowing.value = electionsDatasource.getElectionById(electionId) != null
+        }
+    }
+
+    fun onFollowButtonClick() {
+        viewModelScope.launch {
+            if (_isFollowing.value!!) { // is following, need to unfollow when click
+                unfollowElection()
+            } else {
+                followElection()
+            }
+            checkLocalElectionById()
+        }
+    }
+
+    private suspend fun unfollowElection() {
+        electionsDatasource.deleteElection(_election.value!!)
+    }
+
+    private suspend fun followElection() {
+        electionsDatasource.insertElection(_election.value!!)
     }
 
     fun onToastMessageShow() {

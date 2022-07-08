@@ -1,6 +1,7 @@
 package com.example.android.politicalpreparedness.data
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import com.example.android.politicalpreparedness.Result
 import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.network.CivicsApi
@@ -34,5 +35,25 @@ class ElectionsDatasource(
             Result.Error(e)
         }
     }
+
+    suspend fun getElectionById(id: Int): Election? =
+        withContext(Dispatchers.IO) {
+            return@withContext database.electionDao.getElectionById(id)
+        }
+
+
+    suspend fun insertElection(election: Election) = withContext(Dispatchers.IO) {
+        database.electionDao.insert(election)
+    }
+
+
+    suspend fun deleteElection(election: Election) = withContext(Dispatchers.IO) {
+        database.electionDao.delete(election)
+    }
+
+     fun getSavedElections() =database.electionDao.getAllElection()
+//        withContext(Dispatchers.IO) {
+//            return@withContext database.electionDao.getAllElection()
+//        }
 
 }
