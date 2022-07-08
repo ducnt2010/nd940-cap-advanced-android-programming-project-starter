@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="default_padding">8dp</dimen>
-
+    <dimen name="default_margin">8dp</dimen>
     <dimen name="padding_normal">16dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
+    <dimen name="header_text_size">24sp</dimen>
+    <dimen name="election_item_text_size">16sp</dimen>
 
 </resources>

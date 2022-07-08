@@ -4,14 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="election"
             type="com.example.android.politicalpreparedness.network.models.Election" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_margin="@dimen/default_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/electionName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{election.name}"
+                android:textSize="@dimen/election_item_text_size"
+                android:textStyle="bold"
+                tools:text="Name" />
+
+            <TextView
+                android:id="@+id/electionDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{election.electionDay.toString()}"
+                android:textSize="@dimen/election_item_text_size"
+                tools:text="Date" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

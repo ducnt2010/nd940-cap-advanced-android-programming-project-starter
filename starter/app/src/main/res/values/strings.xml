@@ -4,6 +4,8 @@
 
     <string name="find_my_representatives">FIND MY REPRESENTATIVES</string>
     <string name="upcoming_elections">UPCOMING ELECTIONS</string>
+    <string name="upcoming_elections_header">Upcoming Elections</string>
+    <string name="saved_elections_header">Saved Elections</string>
 
 
 </resources>
