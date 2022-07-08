@@ -6,6 +6,9 @@
     <string name="upcoming_elections">UPCOMING ELECTIONS</string>
     <string name="upcoming_elections_header">Upcoming Elections</string>
     <string name="saved_elections_header">Saved Elections</string>
+    <string name="loading_upcoming_elections_message">Loading upcoming Elections</string>
+    <string name="load_upcoming_elections_success">Load upcoming Elections success</string>
+    <string name="load_upcoming_elections_error">Load upcoming Elections Error</string>
 
 
 </resources>

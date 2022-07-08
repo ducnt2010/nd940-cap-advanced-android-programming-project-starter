@@ -48,8 +48,9 @@
                 android:id="@+id/statusLoadingWheel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:indeterminate="true"
-                android:visibility="gone"
+                app:isShowLoading="@{viewModel.showLoading}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -66,7 +67,7 @@
             <TextView
                 android:id="@+id/savedHeader"
                 style="@style/ElectionHeaderTextStyle"
-                android:text="@string/upcoming_elections_header"
+                android:text="@string/saved_elections_header"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
