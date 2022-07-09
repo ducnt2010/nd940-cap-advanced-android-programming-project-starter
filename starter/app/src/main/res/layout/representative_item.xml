@@ -23,8 +23,8 @@
             <ImageView
                 android:id="@+id/representativePhoto"
                 profileImage="@{representative.official.photoUrl}"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="@dimen/avatar_size"
+                android:layout_height="@dimen/avatar_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
