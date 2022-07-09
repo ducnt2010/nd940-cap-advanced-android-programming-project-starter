@@ -2,10 +2,13 @@ package com.example.android.politicalpreparedness.representative
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -15,12 +18,15 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.example.android.politicalpreparedness.BuildConfig
+import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.election.ElectionsViewModel
 import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.representative.adapter.RepresentativeListAdapter
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.snackbar.Snackbar
 import java.util.Locale
 
 private const val TAG = "RepresentativeFragment"
@@ -35,6 +41,7 @@ class DetailFragment : Fragment() {
     // Declare ViewModel
     private val viewModel by viewModels<RepresentativeViewModel>()
 
+    private lateinit var binding: FragmentRepresentativeBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreateView(
@@ -44,7 +51,7 @@ class DetailFragment : Fragment() {
     ): View? {
 
         // Establish bindings
-        val binding = FragmentRepresentativeBinding.inflate(inflater)
+        binding = FragmentRepresentativeBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -60,12 +67,10 @@ class DetailFragment : Fragment() {
                 id: Long
             ) {
                 viewModel.onStateItemSelected(binding.state.selectedItem as String)
-//                viewModel.stateAddress = binding.state.selectedItem as String
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 viewModel.onStateItemSelected(binding.state.selectedItem as String)
-//                viewModel.stateAddress = binding.state.selectedItem as String
             }
 
         }
@@ -98,11 +103,24 @@ class DetailFragment : Fragment() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         // Handle location permission result to get location on permission granted
-        if (requestCode == REQUEST_LOCATION_PERMISSION
-            && grantResults.size > 0
-            && grantResults[0] == PackageManager.PERMISSION_GRANTED
-        ) {
-            getLocation()
+        if (requestCode == REQUEST_LOCATION_PERMISSION) {
+            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLocation()
+            } else {
+                // Permission denied.
+                Snackbar.make(
+                    binding.root,
+                    R.string.permission_denied_explanation, Snackbar.LENGTH_INDEFINITE
+                )
+                    .setAction(R.string.settings) {
+                        // Displays App settings screen.
+                        startActivity(Intent().apply {
+                            action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                            data = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        })
+                    }.show()
+            }
         }
     }
 

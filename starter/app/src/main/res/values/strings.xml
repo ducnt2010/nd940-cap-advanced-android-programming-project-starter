@@ -28,6 +28,8 @@
     <string name="city_text_hint">city</string>
     <string name="zip_text_hint">Zip</string>
     <string name="load_representatives_failed_message">Load representatives failed</string>
+    <string name="permission_denied_explanation">You need to grant location permission in order to select the location.</string>
+    <string name="settings">Settings</string>
 
 
 </resources>
