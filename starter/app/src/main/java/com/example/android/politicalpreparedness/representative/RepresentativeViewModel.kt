@@ -37,7 +37,7 @@ class RepresentativeViewModel(private val representativesDatasource: Representat
     var zipAddress = MutableLiveData<String>()
 
     // Create function to fetch representatives from API from a provided address
-    fun getRepresentatives(
+    fun loadRepresentatives(
         address: Address = Address(
             line1Address.value.toString(),
             line2Address.value.toString(),

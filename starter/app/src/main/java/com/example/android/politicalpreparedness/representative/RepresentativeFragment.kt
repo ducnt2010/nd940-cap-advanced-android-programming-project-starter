@@ -1,6 +1,7 @@
 package com.example.android.politicalpreparedness.representative
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -21,7 +22,6 @@ import androidx.lifecycle.Observer
 import com.example.android.politicalpreparedness.BuildConfig
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
-import com.example.android.politicalpreparedness.election.ElectionsViewModel
 import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.representative.adapter.RepresentativeListAdapter
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -77,7 +77,7 @@ class DetailFragment : Fragment() {
 
         binding.buttonSearch.setOnClickListener {
 
-            viewModel.getRepresentatives()
+            viewModel.loadRepresentatives()
         }
         binding.buttonLocation.setOnClickListener {
             if (checkLocationPermissions()) {
@@ -143,6 +143,7 @@ class DetailFragment : Fragment() {
         ) === PackageManager.PERMISSION_GRANTED
     }
 
+    @SuppressLint("MissingPermission")
     private fun getLocation() {
         // Get location from LocationServices
         fusedLocationClient.lastLocation
@@ -150,7 +151,7 @@ class DetailFragment : Fragment() {
                 location?.let {
                     val address = geoCodeLocation(location)
                     viewModel.updateAddress(address)
-                    viewModel.getRepresentatives()
+                    viewModel.loadRepresentatives()
                     Log.i(TAG, "getLocation: $address")
                 }
             }

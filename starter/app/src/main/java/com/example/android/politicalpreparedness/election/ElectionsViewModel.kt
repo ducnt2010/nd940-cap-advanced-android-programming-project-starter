@@ -40,11 +40,11 @@ class ElectionsViewModel(private val electionsDatasource: ElectionsDatasource) :
         get() = _showLoading
 
     init {
-        getUpcomingElections()
+        loadUpcomingElections()
     }
 
     // Create val and functions to populate live data for upcoming elections from the API and saved elections from local database
-    fun getUpcomingElections() {
+    fun loadUpcomingElections() {
         _showLoading.value = true
         _showMessageInt.value = R.string.loading_upcoming_elections_message
         viewModelScope.launch {
