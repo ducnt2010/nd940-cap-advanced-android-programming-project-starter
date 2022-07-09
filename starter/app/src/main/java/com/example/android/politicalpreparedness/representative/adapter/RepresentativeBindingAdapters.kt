@@ -19,6 +19,7 @@ fun fetchImage(view: ImageView, src: String?) {
         Glide.with(view)
             .load(uri)
             .circleCrop()
+            .placeholder(R.drawable.ic_profile)
             .error(R.drawable.ic_profile)
             .into(view)
         return
