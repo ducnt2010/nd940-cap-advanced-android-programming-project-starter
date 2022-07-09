@@ -41,7 +41,7 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        //TODO: Establish bindings
+        // Establish bindings
         val binding = FragmentRepresentativeBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -69,14 +69,18 @@ class DetailFragment : Fragment() {
 
         binding.buttonSearch.setOnClickListener {
             val address = Address(
-                viewModel.line1Address,
-                viewModel.line2Address,
-                viewModel.cityAddress,
-                viewModel.stateAddress,
-                viewModel.zipAddress
+                viewModel.line1Address.value.toString(),
+                viewModel.line2Address.value.toString(),
+                viewModel.cityAddress.value.toString(),
+                viewModel.stateAddress.value.toString(),
+                viewModel.zipAddress.value.toString()
             )
-            Log.i(TAG, "Address: $address")
-            viewModel.getRepresentatives()
+            Log.i(TAG, "Test Address: $address")
+        }
+        binding.buttonLocation.setOnClickListener {
+            if (checkLocationPermissions()) {
+                getLocation()
+            }
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
@@ -95,7 +99,7 @@ class DetailFragment : Fragment() {
             && grantResults.size > 0
             && grantResults[0] == PackageManager.PERMISSION_GRANTED
         ) {
-
+            getLocation()
         }
     }
 
@@ -124,6 +128,9 @@ class DetailFragment : Fragment() {
             .addOnSuccessListener { location: Location? ->
                 location?.let {
                     val address = geoCodeLocation(location)
+                    viewModel.updateAddress(address)
+                    viewModel.getRepresentatives()
+                    Log.i(TAG, "getLocation: $address")
                 }
             }
     }

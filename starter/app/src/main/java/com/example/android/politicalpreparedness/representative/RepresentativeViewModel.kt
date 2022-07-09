@@ -21,20 +21,20 @@ class RepresentativeViewModel(private val representativesDatasource: Representat
 
     // Livedata for address
 
-    var line1Address: String = ""
-    var line2Address: String? = ""
-    var cityAddress: String = ""
-    var stateAddress: String = ""
-    var zipAddress: String = ""
+    val line1Address = MutableLiveData<String>()
+    var line2Address= MutableLiveData<String>()
+    var cityAddress= MutableLiveData<String>()
+    var stateAddress= MutableLiveData<String>()
+    var zipAddress= MutableLiveData<String>()
 
     // Create function to fetch representatives from API from a provided address
     fun getRepresentatives(
         address: Address = Address(
-            line1Address,
-            line2Address,
-            cityAddress,
-            stateAddress,
-            zipAddress
+            line1Address.value.toString(),
+            line2Address.value.toString(),
+            cityAddress.value.toString(),
+            stateAddress.value.toString(),
+            zipAddress.value.toString()
         )
     ) {
         viewModelScope.launch {
@@ -54,7 +54,16 @@ class RepresentativeViewModel(private val representativesDatasource: Representat
     }
 
     fun onStateItemSelected(state: String) {
-        stateAddress = state
+        stateAddress.value = state
+    }
+
+    fun updateAddress(address: Address) {
+        Log.i(TAG, "updateAddress: $address")
+        line1Address.value = address.line1
+        line2Address.value = address.line2
+        cityAddress.value = address.city
+        stateAddress.value = address.state
+        zipAddress.value = address.zip
     }
 
     /**
