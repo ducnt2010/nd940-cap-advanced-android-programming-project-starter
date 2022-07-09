@@ -68,14 +68,8 @@ class DetailFragment : Fragment() {
         }
 
         binding.buttonSearch.setOnClickListener {
-            val address = Address(
-                viewModel.line1Address.value.toString(),
-                viewModel.line2Address.value.toString(),
-                viewModel.cityAddress.value.toString(),
-                viewModel.stateAddress.value.toString(),
-                viewModel.zipAddress.value.toString()
-            )
-            Log.i(TAG, "Test Address: $address")
+
+            viewModel.getRepresentatives()
         }
         binding.buttonLocation.setOnClickListener {
             if (checkLocationPermissions()) {
@@ -85,7 +79,7 @@ class DetailFragment : Fragment() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
-        return binding.root // temporary
+        return binding.root
     }
 
     override fun onRequestPermissionsResult(
