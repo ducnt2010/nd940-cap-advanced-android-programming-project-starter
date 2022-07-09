@@ -2,6 +2,7 @@ package com.example.android.politicalpreparedness.representative
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.Result
 import com.example.android.politicalpreparedness.data.ElectionsDatasource
 import com.example.android.politicalpreparedness.data.RepresentativesDatasource
@@ -19,13 +20,21 @@ class RepresentativeViewModel(private val representativesDatasource: Representat
     val representativesList: LiveData<List<Representative>>
         get() = _representativesList
 
+    private val _showMessageInt = MutableLiveData<Int>()
+    val showMessageInt: LiveData<Int>
+        get() = _showMessageInt
+
+    private val _showLoading = MutableLiveData<Boolean>()
+    val showLoading: LiveData<Boolean>
+        get() = _showLoading
+
     // Livedata for address
 
     val line1Address = MutableLiveData<String>()
-    var line2Address= MutableLiveData<String>()
-    var cityAddress= MutableLiveData<String>()
-    var stateAddress= MutableLiveData<String>()
-    var zipAddress= MutableLiveData<String>()
+    var line2Address = MutableLiveData<String>()
+    var cityAddress = MutableLiveData<String>()
+    var stateAddress = MutableLiveData<String>()
+    var zipAddress = MutableLiveData<String>()
 
     // Create function to fetch representatives from API from a provided address
     fun getRepresentatives(
@@ -37,6 +46,7 @@ class RepresentativeViewModel(private val representativesDatasource: Representat
             zipAddress.value.toString()
         )
     ) {
+        _showLoading.value = true
         viewModelScope.launch {
             Log.i(TAG, "getRepresentatives: Address= $address")
             val result = representativesDatasource.getRepresentatives(address.toFormattedString())
@@ -47,11 +57,14 @@ class RepresentativeViewModel(private val representativesDatasource: Representat
 
                 }
                 is Result.Error -> {
-                    Log.i(TAG, "getRepresentatives: ERRO ${result.exception}")
+                    _showMessageInt.value = R.string.load_representatives_failed_message
+                    Log.i(TAG, "getRepresentatives: ERROR ${result.exception}")
                 }
             }
+            _showLoading.value = false
         }
     }
+
 
     fun onStateItemSelected(state: String) {
         stateAddress.value = state
@@ -66,19 +79,8 @@ class RepresentativeViewModel(private val representativesDatasource: Representat
         zipAddress.value = address.zip
     }
 
-    /**
-     *  The following code will prove helpful in constructing a representative from the API. This code combines the two nodes of the RepresentativeResponse into a single official :
-
-    val (offices, officials) = getRepresentativesDeferred.await()
-    _representatives.value = offices.flatMap { office -> office.getRepresentatives(officials) }
-
-    Note: getRepresentatives in the above code represents the method used to fetch data from the API
-    Note: _representatives in the above code represents the established mutable live data housing representatives
-
-     */
-
-    //TODO: Create function get address from geo location
-
-    //TODO: Create function to get address from individual fields
+    fun onToastShow() {
+        _showMessageInt.value = null
+    }
 
 }

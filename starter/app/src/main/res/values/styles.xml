@@ -38,6 +38,13 @@
         <item name="android:textSize">@dimen/info_text_size</item>
     </style>
 
+    <style name="RepresentativeSearchHeaderStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/representative_search_header_text_size</item>
+    </style>
+
     <!-- TODO: Add necessary styles -->
 
 </resources>

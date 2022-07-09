@@ -42,12 +42,6 @@ class ElectionsFragment : Fragment() {
                 viewModel.onElectionItemSelected(it)
             })
 
-//        viewModel.upcomingElections.observe(this, Observer {
-//            if (it != null) {
-//                (binding.upcomingRecyclerview.adapter as ElectionListAdapter).submitList(it)
-//            }
-//        })
-
         viewModel.selectedElection.observe(this, Observer {
             if (it != null) {
                 findNavController().navigate(
@@ -67,15 +61,7 @@ class ElectionsFragment : Fragment() {
             }
         })
 
-        //TODO: Link elections to voter info
-
-        //TODO: Initiate recycler adapters
-
-        //TODO: Populate recycler adapters
-
         return binding.root
     }
-
-    //TODO: Refresh adapters when fragment loads
 
 }

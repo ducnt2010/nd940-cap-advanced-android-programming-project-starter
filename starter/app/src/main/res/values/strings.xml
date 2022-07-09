@@ -23,6 +23,11 @@
     <string name="find_my_representatives_search">Find my representatives</string>
     <string name="use_my_location_search">Use my location</string>
     <string name="my_representatives_title">My Representatives</string>
+    <string name="address_line_1">Address Line 1</string>
+    <string name="address_line_2">Address Line 2</string>
+    <string name="city_text_hint">city</string>
+    <string name="zip_text_hint">Zip</string>
+    <string name="load_representatives_failed_message">Load representatives failed</string>
 
 
 </resources>

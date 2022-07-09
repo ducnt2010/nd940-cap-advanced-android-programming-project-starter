@@ -10,9 +10,11 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.election.ElectionsViewModel
 import com.example.android.politicalpreparedness.network.models.Address
@@ -46,6 +48,7 @@ class DetailFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
+
         // Define and assign Representative adapter
         binding.listRepresentatives.adapter = RepresentativeListAdapter()
 
@@ -76,6 +79,12 @@ class DetailFragment : Fragment() {
                 getLocation()
             }
         }
+        viewModel.showMessageInt.observe(this, Observer {
+            if (it != null) {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                viewModel.onToastShow()
+            }
+        })
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
