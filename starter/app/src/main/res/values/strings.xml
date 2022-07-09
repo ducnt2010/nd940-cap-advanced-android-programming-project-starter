@@ -19,6 +19,10 @@
     <string name="facebook_content_description">Facebook</string>
     <string name="twitter_content_description">Twitter</string>
     <string name="www_content_description">WWW Link</string>
+    <string name="representative_search_title">Representative Search</string>
+    <string name="find_my_representatives_search">Find my representatives</string>
+    <string name="use_my_location_search">Use my location</string>
+    <string name="my_representatives_title">My Representatives</string>
 
 
 </resources>
