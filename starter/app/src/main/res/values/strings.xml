@@ -16,4 +16,9 @@
     <string name="follow_election">Follow Election</string>
     <string name="unfollow_election">UnFollow Election</string>
 
+    <string name="facebook_content_description">Facebook</string>
+    <string name="twitter_content_description">Twitter</string>
+    <string name="www_content_description">WWW Link</string>
+
+
 </resources>

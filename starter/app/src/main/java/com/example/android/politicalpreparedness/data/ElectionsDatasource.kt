@@ -51,9 +51,7 @@ class ElectionsDatasource(
         database.electionDao.delete(election)
     }
 
-     fun getSavedElections() =database.electionDao.getAllElection()
-//        withContext(Dispatchers.IO) {
-//            return@withContext database.electionDao.getAllElection()
-//        }
+    fun getSavedElections() = database.electionDao.getAllElection()
+
 
 }
