@@ -12,11 +12,18 @@ import kotlinx.coroutines.launch
 
 private const val TAG = "RepresentativeViewModel"
 
-class RepresentativeViewModel(private val representativesDatasource: RepresentativesDatasource = RepresentativesDatasource()) :
+class RepresentativeViewModel(
+    private val state: SavedStateHandle
+) :
     ViewModel() {
+    private val REPRESENTATIVE_LIST = "REPRESENTATIVE_LIST"
+
+    private val representativesDatasource: RepresentativesDatasource = RepresentativesDatasource()
 
     // Establish live data for representatives and address\
-    private val _representativesList = MutableLiveData<List<Representative>>()
+//    private val _representativesList = MutableLiveData<List<Representative>>()
+
+    private val _representativesList = state.getLiveData<List<Representative>>(REPRESENTATIVE_LIST)
     val representativesList: LiveData<List<Representative>>
         get() = _representativesList
 

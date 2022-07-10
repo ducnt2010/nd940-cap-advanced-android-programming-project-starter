@@ -19,6 +19,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.SavedStateViewModelFactory
+import androidx.lifecycle.ViewModelProvider
 import com.example.android.politicalpreparedness.BuildConfig
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
@@ -40,7 +42,11 @@ class DetailFragment : Fragment() {
     }
 
     // Declare ViewModel
-    private val viewModel by viewModels<RepresentativeViewModel>()
+    private val viewModel by viewModels<RepresentativeViewModel> {
+        SavedStateViewModelFactory(requireActivity().application, this)
+    }
+//    private lateinit var viewModel: RepresentativeViewModel
+
 
     private lateinit var binding: FragmentRepresentativeBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient

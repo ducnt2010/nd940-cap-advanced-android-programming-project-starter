@@ -75,16 +75,6 @@ class VoterInfoViewModel(
     fun loadVoterInfo() {
         Log.i(TAG, "loadVoterInfo: Division= $electionDivision ")
 
-        // Test
-//        val electionAdapter=ElectionAdapter()
-//        val division1=electionAdapter.divisionFromJson("ocd-division/country:us/district:dc")
-//        val division2=electionAdapter.divisionFromJson("ocd-division/country:us/state:dc")
-//
-//        Log.i(TAG, "loadVoterInfo: TEST division1= $division1")
-//        Log.i(TAG, "loadVoterInfo: TEST division2= $division2")
-
-        //
-
         viewModelScope.launch {
             val address = "${electionDivision.state},${electionDivision.country}"
             val result = electionsDatasource.getVoterInfo(address, electionId)
