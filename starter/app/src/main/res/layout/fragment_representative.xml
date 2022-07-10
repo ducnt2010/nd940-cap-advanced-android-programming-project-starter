@@ -11,8 +11,9 @@
             type="com.example.android.politicalpreparedness.representative.RepresentativeViewModel" />
     </data>
 
-    <!-- TODO: Add motion scene to hide form on vertical scroll. -->
+    <!--  Add motion scene to hide form on vertical scroll. -->
     <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingRight="@dimen/default_padding"

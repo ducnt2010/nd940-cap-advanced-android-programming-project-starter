@@ -36,6 +36,7 @@ class DetailFragment : Fragment() {
     companion object {
         // Add Constant for Location request
         private val REQUEST_LOCATION_PERMISSION = 1
+        private val TRANSITION_STATE = "TRANSITION_STATE"
     }
 
     // Declare ViewModel
@@ -55,6 +56,9 @@ class DetailFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
+        if (savedInstanceState != null) {
+            binding.motionLayout.transitionState = savedInstanceState.getBundle(TRANSITION_STATE)
+        }
 
         // Define and assign Representative adapter
         binding.listRepresentatives.adapter = RepresentativeListAdapter()
@@ -76,10 +80,11 @@ class DetailFragment : Fragment() {
         }
 
         binding.buttonSearch.setOnClickListener {
-
+            hideKeyboard()
             viewModel.loadRepresentatives()
         }
         binding.buttonLocation.setOnClickListener {
+            hideKeyboard()
             if (checkLocationPermissions()) {
                 getLocation()
             }
@@ -175,6 +180,12 @@ class DetailFragment : Fragment() {
     private fun hideKeyboard() {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view!!.windowToken, 0)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        Log.i(TAG, "onSaveInstanceState: ")
+        outState.putBundle(TRANSITION_STATE, binding.motionLayout.transitionState)
+        super.onSaveInstanceState(outState)
     }
 
 }
