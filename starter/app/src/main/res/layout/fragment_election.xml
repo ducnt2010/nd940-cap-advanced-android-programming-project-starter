@@ -11,19 +11,27 @@
             type="com.example.android.politicalpreparedness.election.ElectionsViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="2"
         tools:context="com.example.android.politicalpreparedness.MainActivity">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
 
         <!--  Add Upcoming Election Recycler and Header -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="@dimen/default_padding">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="@dimen/default_padding"
+            app:layout_constraintBottom_toTopOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/upcomingHeader"
@@ -46,9 +54,9 @@
 
             <ProgressBar
                 android:id="@+id/statusLoadingWheel"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:indeterminate="true"
                 app:isShowLoading="@{viewModel.showLoading}"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -59,10 +67,13 @@
 
         <!-- Add Saved Election Recycler and Header -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="@dimen/default_padding">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="@dimen/default_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline">
 
             <TextView
                 android:id="@+id/savedHeader"
@@ -85,5 +96,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
