@@ -16,7 +16,14 @@ class RepresentativeViewModel(
     private val state: SavedStateHandle
 ) :
     ViewModel() {
+    // use to save state
     private val REPRESENTATIVE_LIST = "REPRESENTATIVE_LIST"
+    private val ADDRESS_LINE_1 = "ADDRESS_LINE_1"
+    private val ADDRESS_LINE_2 = "ADDRESS_LINE_2"
+    private val ADDRESS_CITY = "ADDRESS_CITY"
+    private val ADDRESS_STATE = "ADDRESS_STATE"
+    private val ADDRESS_ZIP = "ADDRESS_ZIP"
+
 
     private val representativesDatasource: RepresentativesDatasource = RepresentativesDatasource()
 
@@ -37,11 +44,17 @@ class RepresentativeViewModel(
 
     // Livedata for address
 
-    val line1Address = MutableLiveData<String>()
-    var line2Address = MutableLiveData<String>()
-    var cityAddress = MutableLiveData<String>()
-    var stateAddress = MutableLiveData<String>()
-    var zipAddress = MutableLiveData<String>()
+//    val line1Address = MutableLiveData<String>()
+//    var line2Address = MutableLiveData<String>()
+//    var cityAddress = MutableLiveData<String>()
+//    var stateAddress = MutableLiveData<String>()
+//    var zipAddress = MutableLiveData<String>()
+
+    val line1Address = state.getLiveData<String>(ADDRESS_LINE_1)
+    var line2Address = state.getLiveData<String>(ADDRESS_LINE_2)
+    var cityAddress = state.getLiveData<String>(ADDRESS_CITY)
+    var stateAddress = state.getLiveData<String>(ADDRESS_STATE)
+    var zipAddress = state.getLiveData<String>(ADDRESS_ZIP)
 
     // Create function to fetch representatives from API from a provided address
     fun loadRepresentatives(
